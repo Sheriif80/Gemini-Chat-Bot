@@ -1,3 +1,5 @@
+import 'package:ai_chat_bot/features/chat/domain/entities/message_entity.dart';
+
 class GeminiRequest {
   final List<MessageModel> contents;
 
@@ -60,6 +62,20 @@ class MessageModel {
 
   Map<String, dynamic> toJson() {
     return {'role': role, 'parts': parts.map((e) => e.toJson()).toList()};
+  }
+
+  MessageEntity toEntity() {
+    return MessageEntity(
+      role: role,
+      text: parts.isNotEmpty ? parts.first.text : '',
+    );
+  }
+
+  factory MessageModel.fromEntity(MessageEntity entity) {
+    return MessageModel(
+      role: entity.role,
+      parts: [MessagePart(text: entity.text)],
+    );
   }
 }
 
