@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ai_chat_bot/core/networking/api_service.dart';
 import 'package:ai_chat_bot/features/chat/data/models/gemini_models.dart';
 
@@ -6,7 +7,7 @@ class GeminiChatService {
   final ApiService _apiService;
 
   // TODO: Move this to an environment variable (.env) for security
-  final String _apiKey = 'YOUR_API_KEY_HERE';
+  final String _apiKey = dotenv.get('GEMINI_API_KEY');
 
   final String _baseUrl =
       'https://generativelanguage.googleapis.com/v1beta/models';
