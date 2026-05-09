@@ -1,7 +1,8 @@
 import 'package:ai_chat_bot/core/di/dependency_injection.dart';
-import 'package:ai_chat_bot/views/home_view.dart';
+import 'package:ai_chat_bot/features/chat/presentation/views/chat_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomeView());
+    return ScreenUtilInit(
+      designSize: const Size(390, 884),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp(debugShowCheckedModeBanner: false, home: ChatView());
+      },
+      child: const ChatView(),
+    );
   }
 }
