@@ -88,10 +88,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       style: TextStyle(fontSize: 16.sp),
       decoration: InputDecoration(
-        hintText: 'Describe what you need...',
-        hintStyle: TextStyle(color: Colors.black26, fontSize: 16.sp),
+        hintText: 'Describe your needs ...',
+        hintStyle: TextStyle(color: Colors.black26, fontSize: 15.sp),
         border: InputBorder.none,
-        contentPadding: EdgeInsets.symmetric(horizontal: 12.sp),
+        contentPadding: EdgeInsets.symmetric(horizontal: 8.sp),
       ),
       onSubmitted: (_) => _handleSend(),
     );
