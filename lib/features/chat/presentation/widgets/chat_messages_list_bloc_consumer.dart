@@ -23,7 +23,10 @@ class ChatMessagesListBlocConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return ChatMessagesList(messages: messages);
+        return ChatMessagesList(
+          messages: messages,
+          isLoading: state is GeminiSendMessagesLoading,
+        );
       },
     );
   }

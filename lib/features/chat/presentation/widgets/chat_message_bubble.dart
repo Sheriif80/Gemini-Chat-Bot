@@ -1,5 +1,6 @@
 import 'package:ai_chat_bot/features/chat/domain/entities/message_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatMessageBubble extends StatelessWidget {
@@ -13,27 +14,32 @@ class ChatMessageBubble extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
-      child: Column(
-        crossAxisAlignment: isUser
-            ? CrossAxisAlignment.end
-            : CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: isUser
-                ? MainAxisAlignment.end
-                : MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child:
+          Column(
+            crossAxisAlignment: isUser
+                ? CrossAxisAlignment.end
+                : CrossAxisAlignment.start,
             children: [
-              if (!isUser) _buildBotAvatar(),
-              const SizedBox(width: 12),
-              _buildMessageContainer(isUser),
+              Row(
+                mainAxisAlignment: isUser
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (!isUser) _buildBotAvatar(),
+                  const SizedBox(width: 12),
+                  _buildMessageContainer(isUser),
+                ],
+              ),
+              const SizedBox(height: 6),
+              _buildMessageLabel(isUser),
             ],
+          ).animate().shimmer(
+            duration: const Duration(milliseconds: 800),
+            color: Colors.white.withValues(alpha: 0.2),
+            blendMode: BlendMode.srcATop,
           ),
-          const SizedBox(height: 6),
-          _buildMessageLabel(isUser),
-        ],
-      ),
-    );
+    ).animate().fadeIn();
   }
 
   Widget _buildBotAvatar() {
