@@ -1,10 +1,13 @@
+import 'package:ai_chat_bot/features/chat/domain/entities/message_entity.dart';
+import 'package:ai_chat_bot/features/chat/presentation/cubit/gemini_send_messages_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChatInputBar extends StatefulWidget {
-  final Function(String) onSend;
+  final List<MessageEntity> messages;
 
-  const ChatInputBar({super.key, required this.onSend});
+  const ChatInputBar({super.key, required this.messages});
 
   @override
   State<ChatInputBar> createState() => _ChatInputBarState();
@@ -21,7 +24,9 @@ class _ChatInputBarState extends State<ChatInputBar> {
 
   void _handleSend() {
     if (_controller.text.trim().isNotEmpty) {
-      widget.onSend(_controller.text.trim());
+      final String messageText = _controller.text.trim();
+      widget.messages.add(MessageEntity(role: 'user', text: messageText));
+      context.read<GeminiSendMessagesCubit>().sendMessage(widget.messages);
       _controller.clear();
     }
   }
@@ -78,6 +83,8 @@ class _ChatInputBarState extends State<ChatInputBar> {
   Widget _buildTextField() {
     return TextField(
       controller: _controller,
+      maxLines: 4,
+      minLines: 1,
       onTapOutside: (event) => FocusScope.of(context).unfocus(),
       style: TextStyle(fontSize: 16.sp),
       decoration: InputDecoration(

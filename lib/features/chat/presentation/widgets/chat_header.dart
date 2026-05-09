@@ -8,7 +8,7 @@ class ChatHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(24, 60, 24, 30),
+      padding: const EdgeInsets.fromLTRB(24, 55, 24, 15),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -20,7 +20,7 @@ class ChatHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildRobotIcon(),
-          SizedBox(height: 24.h),
+          SizedBox(height: 16.h),
           Text(
             'Hello,',
             style: TextStyle(
