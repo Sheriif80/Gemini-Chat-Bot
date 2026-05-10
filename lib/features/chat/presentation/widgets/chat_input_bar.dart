@@ -25,6 +25,10 @@ class _ChatInputBarState extends State<ChatInputBar> {
   void _handleSend() {
     if (_controller.text.trim().isNotEmpty) {
       final String messageText = _controller.text.trim();
+      if (context.read<GeminiSendMessagesCubit>().state
+          is GeminiSendMessagesError) {
+        widget.messages.removeLast();
+      }
       widget.messages.add(MessageEntity(role: 'user', text: messageText));
       context.read<GeminiSendMessagesCubit>().sendMessage(widget.messages);
       _controller.clear();
